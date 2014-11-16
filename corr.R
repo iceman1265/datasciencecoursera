@@ -1,17 +1,9 @@
 corr <- function(directory, threshold = 0) {
-    # --- Assert 'directory' is a character vector of length 1 indicating the
-    # location of the CSV files.  'threshold' is a numeric vector of length 1
-    # indicating the number of completely observed observations (on all
-    # variables) required to compute the correlation between nitrate and
-    # sulfate; the default is 0.  Return a numeric vector of correlations.
-
-    # --- Assert create an empty numeric vector
     corrsNum <- numeric(0)
 
-    # --- Assert get a data frame as ID = 1:332
+    ## get a data frame as ID = 1:332
     nobsDfr <- complete("specdata")
-
-    # --- Assert apply threshold
+    ##apply threshold
     nobsDfr <- nobsDfr[nobsDfr$nobs > threshold, ]
 
     for (cid in nobsDfr$id) {
@@ -27,13 +19,7 @@ corr <- function(directory, threshold = 0) {
 }
 
 complete <- function(directory, id = 1:332) {
-    # --- Assert 'directory' is a character vector of length 1 indicating the
-    # location of the CSV files.  'id' is an integer vector indicating the
-    # monitor ID numbers to be used Return a data frame of the form: id nobs 1
-    # 117 2 1041 ...  where 'id' is the monitor ID number and 'nobs' is the
-    # number of complete cases
-
-    # --- Assert create an empty vector
+    ## Assert create an empty vector
     nobsNum <- numeric(0)
 
     for (cid in id) {
@@ -50,13 +36,6 @@ complete <- function(directory, id = 1:332) {
 }
 
 getmonitor <- function(id, directory, summarize = FALSE) {
-    # --- Assert 'id' is a vector of length 1 indicating the monitor ID
-    # number. The user can specify 'id' as either an integer, a character, or
-    # a numeric.  'directory' is a character vector of length 1 indicating the
-    # location of the CSV files 'summarize' is a logical indicating whether a
-    # summary of the data should be printed to the console; the default is
-    # FALSE
-
     # --- Assert construct file name Directory is pre-appended to file name.
     # Use sprintf() to add leading zeroes.  E.g. 'specdata/001.csv'
     fileStr <- paste("/Users/BossDawg/Desktop/",directory, "/", sprintf("%03d", as.numeric(id)), ".csv", 
